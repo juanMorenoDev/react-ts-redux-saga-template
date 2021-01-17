@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.css'
+import { Provider } from 'react-redux'
+import { history, store } from '@store'
+import { ConnectedRouter } from 'connected-react-router'
+import { Route, Switch } from 'react-router'
+import LoginView from '@views/loginView'
+import HomeView from '@views/home'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+const App: React.FC = () => (
+  <>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <Switch>
+          <Route strict exact path="/">
+            <HomeView />
+          </Route>
+          <Route path="/login">
+            <LoginView />
+          </Route>
+        </Switch>
+      </ConnectedRouter>
+    </Provider>
+  </>
+)
+export default App
